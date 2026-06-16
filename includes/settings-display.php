@@ -382,9 +382,9 @@ function render_settings_page() {
             <a href="#general_settings" class="btn <?php 
             if ( !isset($_GET['section'])) { echo "no-section "; } // opening setting page
             if ( !isset($_GET['section']) && isset($_GET['profile_id']) ) { echo "no-section-editing-profile "; } // opening setting page
-            if ( $_GET['section'] === "general" ) { echo "general-selected "; } // selecting general tab
-            if ( $_GET['section'] != "profile" && !isset($_GET['profile_id']) ){ echo "active_tab"; }?>"> 
-                General Settings  
+            if ( isset($_GET['section']) && $_GET['section'] === "general" ) { echo "general-selected "; } // selecting general tab
+            if ( (!isset($_GET['section']) || $_GET['section'] != "profile") && !isset($_GET['profile_id']) ){ echo "active_tab"; }?>">
+                General Settings
             </a>
 
             <a href="#profile_settings" class="btn <?php if ( (isset($_GET['profile_id']) ) || (isset($_GET['section']) && $_GET['section'] === "profile")  ){ echo "active_tab"; }?>"> 
@@ -411,8 +411,8 @@ function render_settings_page() {
             </div>
             <div class="data_card-list form-group <?php if ( !isset($_GET['section'])) { echo "no-section "; } // opening setting page
             if ( !isset($_GET['section']) && isset($_GET['profile_id']) ) { echo "no-section-editing-profile "; } // opening setting page
-            if ( $_GET['section'] === "general" ) { echo "general-selected "; } // selecting general tab
-            if ( $_GET['section'] != "profile" && !isset($_GET['profile_id']) ){ echo "active_tab_content"; }?>" id="general_settings">
+            if ( isset($_GET['section']) && $_GET['section'] === "general" ) { echo "general-selected "; } // selecting general tab
+            if ( (!isset($_GET['section']) || $_GET['section'] != "profile") && !isset($_GET['profile_id']) ){ echo "active_tab_content"; }?>" id="general_settings">
                 <div>
                     
                     <?php
