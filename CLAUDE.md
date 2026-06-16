@@ -63,6 +63,18 @@ Assets in `assets/js/` and `assets/css/` are enqueued via `includes/admin-style-
 
 Section content (header/about/footer HTML blocks) exists in the DB and settings UI but the corresponding tabs are currently commented out in the nav.
 
+## Git workflow
+
+After completing any meaningful unit of work — a feature, a fix, a refactor — commit and push immediately. Don't batch unrelated changes into one commit.
+
+Commit message format: short imperative subject line (e.g. `Add CC email support to send handler`), no period at the end. Keep it specific enough that the history tells the story of what was built and why.
+
+```bash
+git add <specific files>
+git commit -m "Your message here"
+git push
+```
+
 ## Security conventions
 
 - Always use `$wpdb->prepare()` for DB queries with user-supplied values
