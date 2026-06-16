@@ -535,7 +535,7 @@ function render_settings_page() {
                         ?>
                         <br>
                         <?php wp_nonce_field('save_general_settings', 'general_settings_nonce'); ?>
-                        <input type="submit" class="btn btn-primary" value="Save General Settigns">
+                        <input type="submit" name="save_general_settings" class="btn btn-primary" value="Save General Settings">
                     </form>
                 </div> 
             </div>

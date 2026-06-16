@@ -6,7 +6,12 @@ if (!defined('ABSPATH')) {
 
 // Handle form submission
 if (isset($_POST['save_general_settings'])) {
-//if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (!isset($_POST['general_settings_nonce']) || !wp_verify_nonce($_POST['general_settings_nonce'], 'save_general_settings')) {
+        wp_die('Security check failed.');
+    }
+    if (!current_user_can('manage_options')) {
+        wp_die('You do not have permission to change these settings.');
+    }
     global $wpdb; // Use the WordPress database object
 
     // Table name (use the correct table name with your WP prefix)
