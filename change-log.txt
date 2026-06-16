@@ -1,0 +1,5 @@
+Changes:
+
+Version: 0.43
+	- add sender_profiles database table for Sender Profiles Tab options on Settings page
+	- change database table name options_general to general_options
