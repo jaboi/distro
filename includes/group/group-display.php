@@ -27,6 +27,8 @@ function render_group_page() {
         LEFT JOIN $table_name_group_taxonomy t ON g.id = t.groups_id
     ", ARRAY_A);
 
+    $org_group_id = isset($_GET['org_group_id']) ? intval($_GET['org_group_id']) : 0;
+
     // Check if we're in "edit" mode
     $is_edit_mode = isset($_GET['action']) && $_GET['action'] === 'edit' && isset($_GET['id']);
     $group_id = $is_edit_mode ? intval($_GET['id']) : 0;
