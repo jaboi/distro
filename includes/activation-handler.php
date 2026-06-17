@@ -126,13 +126,10 @@ function plugin_activation() {
             font_color VARCHAR(255) NOT NULL,
             link_color VARCHAR(255) NOT NULL,
             font_opt VARCHAR(255) NOT NULL,
-            header_id mediumint(9) NOT NULL,
-            about_id mediumint(9) NOT NULL,
-            footer_id mediumint(9) NOT NULL,
-            PRIMARY KEY (id),
-            FOREIGN KEY (header_id) REFERENCES $table_name_section_options(id) ON DELETE CASCADE ON UPDATE CASCADE,
-            FOREIGN KEY (about_id) REFERENCES $table_name_section_options(id) ON DELETE CASCADE ON UPDATE CASCADE,
-            FOREIGN KEY (footer_id) REFERENCES $table_name_section_options(id) ON DELETE CASCADE ON UPDATE CASCADE
+            header_id mediumint(9) DEFAULT NULL,
+            about_id mediumint(9) DEFAULT NULL,
+            footer_id mediumint(9) DEFAULT NULL,
+            PRIMARY KEY (id)
         ) $charset_collate;";
         dbDelta($sql7);
 

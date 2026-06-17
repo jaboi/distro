@@ -85,8 +85,32 @@ require_once plugin_dir_path(__FILE__) . 'includes/email/send-to-orgs.php';
 //require_once(plugin_dir_path(__FILE__) . 'lib/PHPMailer/PHPMailer.php');
 //require_once(plugin_dir_path(__FILE__) . 'lib/PHPMailer/SMTP.php');
 
+function ocm_migrate_sender_profiles_nullable() {
+    if (get_option('ocm_migration_sender_profiles_nullable')) {
+        return;
+    }
+    global $wpdb;
+    $table = $wpdb->prefix . 'sender_profiles';
+    $wpdb->query("ALTER TABLE $table
+        MODIFY COLUMN header_id mediumint(9) DEFAULT NULL,
+        MODIFY COLUMN about_id mediumint(9) DEFAULT NULL,
+        MODIFY COLUMN footer_id mediumint(9) DEFAULT NULL");
+    // Drop FK constraints if they exist
+    $constraints = $wpdb->get_results("
+        SELECT CONSTRAINT_NAME FROM information_schema.TABLE_CONSTRAINTS
+        WHERE TABLE_SCHEMA = DATABASE()
+          AND TABLE_NAME = '{$table}'
+          AND CONSTRAINT_TYPE = 'FOREIGN KEY'
+    ");
+    foreach ($constraints as $constraint) {
+        $wpdb->query("ALTER TABLE $table DROP FOREIGN KEY `{$constraint->CONSTRAINT_NAME}`");
+    }
+    update_option('ocm_migration_sender_profiles_nullable', true);
+}
+add_action('admin_init', 'ocm_migrate_sender_profiles_nullable');
+
 class Organization_Contacts_Manager {
-  
+
 }
 
 new Organization_Contacts_Manager();
